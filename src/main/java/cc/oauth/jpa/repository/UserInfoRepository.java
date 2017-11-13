@@ -1,0 +1,20 @@
+package cc.oauth.jpa.repository;
+
+import cc.oauth.jpa.domain.UserInfo;
+import org.springframework.data.repository.CrudRepository;
+
+public interface UserInfoRepository extends CrudRepository<UserInfo,Long> {
+    /**
+     * 根据userName获取UserInfo
+     * @param userName
+     * @return`
+     */
+    public UserInfo findByUserName(String userName);
+
+    /**
+     * 根据userId获取UserInfo
+     * @param userId
+     * @return
+     */
+    public UserInfo findByUserId(Long userId);
+}
