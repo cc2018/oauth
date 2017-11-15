@@ -5,10 +5,11 @@ import cc.oauth.jpa.domain.Role;
 import cc.oauth.jpa.domain.UserInfo;
 import cc.oauth.jpa.domain.view.PermissionView;
 import cc.oauth.jpa.domain.view.RoleView;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserInfoService {
+public interface UserInfoService extends UserDetailsService {
     /**
      * 根据userName获取UserInfo
      * @param userName

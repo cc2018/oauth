@@ -12,6 +12,8 @@ import cc.oauth.jpa.service.api.UserInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -72,5 +74,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public List<RoleView> findUserRoleByUserId(Long userId) {
         return roleRepository.findUserRoleByUserId(userId);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        return null;
     }
 }

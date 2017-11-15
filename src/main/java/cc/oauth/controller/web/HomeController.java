@@ -20,6 +20,7 @@ public class HomeController {
 
 
     @RequestMapping("/")
+    @ResponseBody
     public String index() {
         return "index";
     }
