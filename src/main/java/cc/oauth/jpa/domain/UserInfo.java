@@ -4,6 +4,7 @@ package cc.oauth.jpa.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="upms_user")
@@ -29,17 +30,14 @@ public class UserInfo implements Serializable {
     private long createTime;
 
     // 会自动建立关联主键
-    // 1、外键的引用类型不一样，主键是int外键是char
-    // 2、找不到主表中 引用的列
-    // 3、主键和外键的字符编码不一致
-    // 4、还有要建立外键的话，要先建立索引。没有建立索引也会出错。
+    // 如果主键和外键的类型不一致
     // 5、还有可能是是标的Table Type 不对，如下的InnoDB 和MyISAM的错误
-//    @ManyToMany
-//    @JoinTable(
-//            name="upms_user_role",
-//            joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"),
-//            inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="role_id"))
-//    private List<Role> roles;
+    @ManyToMany
+    @JoinTable(
+            name="upms_user_role",
+            joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"),
+            inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="role_id"))
+    private List<Role> roles;
 
     private static final long serialVersionUID = 1L;
 
@@ -129,6 +127,14 @@ public class UserInfo implements Serializable {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

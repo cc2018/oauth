@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .anyRequest().authenticated()//所有请求必须登陆后访问
+                .anyRequest().permitAll()//所有请求必须登陆后访问
                 .and()
                     .formLogin()
                     .loginPage("/login")

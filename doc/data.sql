@@ -206,7 +206,7 @@ DROP TABLE IF EXISTS `upms_user_role`;
 CREATE TABLE `upms_user_role` (
   `user_role_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `user_id` int(10) unsigned NOT NULL COMMENT '用户编号',
-  `role_id` int(10) DEFAULT NULL COMMENT '角色编号',
+  `role_id` int(10) unsigned DEFAULT NULL COMMENT '角色编号',
   PRIMARY KEY (`user_role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='用户角色关联表';
 
@@ -215,6 +215,7 @@ CREATE TABLE `upms_user_role` (
 -- ----------------------------
 INSERT INTO `upms_user_role` VALUES ('1', '1', '1');
 INSERT INTO `upms_user_role` VALUES ('2', '2', '3');
+INSERT INTO `upms_user_role` VALUES ('3', '1', '2');
 
 -- ----------------------------
 -- Table structure for upms_user_permission

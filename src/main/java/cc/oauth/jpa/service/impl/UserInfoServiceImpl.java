@@ -78,6 +78,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        UserInfo userInfo = findByUserName(userName);
         return null;
     }
 }

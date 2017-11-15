@@ -29,7 +29,7 @@ public class ApiUserController {
         user.put("phone", userInfo.getPhone());
         user.put("email", userInfo.getEmail());
 
-        return new OauthResult(OauthResultConstant.SUCCESS, user);
+        return new OauthResult(OauthResultConstant.SUCCESS, userInfo);
     }
 
     //@RequiresPermissions("upms:user:read")
