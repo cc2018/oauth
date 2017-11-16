@@ -78,7 +78,7 @@ DROP TABLE IF EXISTS `upms_user`;
 CREATE TABLE `upms_user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `user_name` varchar(20) NOT NULL COMMENT '帐号',
-  `password` varchar(32) NOT NULL COMMENT '密码MD5(密码+盐)',
+  `password` varchar(60) NOT NULL COMMENT '密码MD5(密码+盐)',
   `salt` varchar(32) DEFAULT NULL COMMENT '盐',
   `realname` varchar(20) DEFAULT NULL COMMENT '姓名',
   `avatar` varchar(150) DEFAULT NULL COMMENT '头像',
@@ -95,6 +95,7 @@ CREATE TABLE `upms_user` (
 -- ----------------------------
 INSERT INTO `upms_user` VALUES ('1', 'admin', '3038D9CB63B3152A79B8153FB06C02F7', '66f1b370c660445a8657bf8bf1794486', 'cc', '/resources/images/avatars/admin.jpg', '', '121212@qq.com', '1', '0', '1493394720491');
 INSERT INTO `upms_user` VALUES ('2', 'test', '285C9762F5F9046F5893F752DFAF3476', 'd2d0d03310444ad388a8b290b0fe8564', 'test', '/resources/images/avatars/test.jpg', '', '1212121121@qq.com', '1', '0', '1493394720495');
+INSERT INTO `upms_user` VALUES ('3', 'cc', '$2a$10$4FfSqrVge4F6qzPvZyGOzOz/NJ7dVrDJrLGqx.yX9aT7nHLW0A5Ru', '', 'cc', '/resources/images/avatars/cc.jpg', '', '1212121121@qq.com', '1', '0', '1493394720495');
 
 -- ----------------------------
 -- Table structure for upms_permission
@@ -216,6 +217,7 @@ CREATE TABLE `upms_user_role` (
 INSERT INTO `upms_user_role` VALUES ('1', '1', '1');
 INSERT INTO `upms_user_role` VALUES ('2', '2', '3');
 INSERT INTO `upms_user_role` VALUES ('3', '1', '2');
+INSERT INTO `upms_user_role` VALUES ('4', '3', '1');
 
 -- ----------------------------
 -- Table structure for upms_user_permission

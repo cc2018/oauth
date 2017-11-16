@@ -2,13 +2,19 @@ package cc.oauth.jpa.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name="upms_user")
-public class UserInfo implements Serializable {
+public class UserInfo implements Serializable, UserDetails {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="user_id")
@@ -32,11 +38,16 @@ public class UserInfo implements Serializable {
     // 会自动建立关联主键
     // 如果主键和外键的类型不一致
     // 5、还有可能是是标的Table Type 不对，如下的InnoDB 和MyISAM的错误
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
-            name="upms_user_role",
-            joinColumns=@JoinColumn(name="user_id", referencedColumnName="user_id"),
-            inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="role_id"))
+        name = "upms_user_role",
+        joinColumns = {
+            @JoinColumn(name="user_id", referencedColumnName="user_id")
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name="role_id", referencedColumnName="role_id")
+        }
+    )
     private List<Role> roles;
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +60,7 @@ public class UserInfo implements Serializable {
         this.userId = userId;
     }
 
+    @Override
     public String getUsername() {
         return userName;
     }
@@ -198,5 +210,35 @@ public class UserInfo implements Serializable {
         result = prime * result + ((getLocked() == null) ? 0 : getLocked().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         return result;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return getLocked() != 1;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> auth = new ArrayList<>();
+        List<Role> roles = getRoles();
+        for(Role role : roles) {
+            auth.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return auth;
     }
 }

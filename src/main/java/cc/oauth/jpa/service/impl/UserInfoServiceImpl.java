@@ -76,9 +76,9 @@ public class UserInfoServiceImpl implements UserInfoService {
         return roleRepository.findUserRoleByUserId(userId);
     }
 
+    // UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        UserInfo userInfo = findByUserName(userName);
-        return null;
+        return findByUserName(userName);
     }
 }
