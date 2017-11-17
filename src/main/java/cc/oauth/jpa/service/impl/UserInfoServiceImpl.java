@@ -12,6 +12,7 @@ import cc.oauth.jpa.service.api.UserInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames="UserInfoService")
 public class UserInfoServiceImpl implements UserInfoService {
     private static Logger log = LoggerFactory.getLogger(UserInfoService.class);
 
